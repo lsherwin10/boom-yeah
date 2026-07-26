@@ -17,7 +17,7 @@ const products = [
   }
 ];
 
-const Featured = () => {
+const Featured = ({ onProductClick }) => {
   return (
     <section className="featured container">
       {/* <span className="section-label">01 / THE DROP</span> */}
@@ -25,7 +25,7 @@ const Featured = () => {
       
       <div className="featured-grid">
         {products.map(product => (
-          <div key={product.id} className="product-card">
+          <div key={product.id} className="product-card" onClick={() => onProductClick(product)}>
             <div className="product-image">
               <img src={product.img} alt={product.title} />
             </div>
