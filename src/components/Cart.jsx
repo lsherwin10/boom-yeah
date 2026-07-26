@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', address: '', city: '', zip: '' });
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', address1: '', address2: '', city: '', state: '', zip: '' });
 
   const total = items.reduce((acc, item) => {
     const priceNum = parseFloat(item.price.replace('$', ''));
@@ -14,18 +15,34 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
 
   const handlePlaceOrder = (e) => {
     e.preventDefault();
-    
+
     // Format cart items for email
-    const orderItems = items.map(item => 
+    const orderItems = items.map(item =>
       `${item.quantity}x ${item.title} (Size: ${item.size}) - ${item.price}`
-    ).join('%0D%0A');
-    
-    const subject = `New Order from ${formData.name}`;
-    const body = `Order Details:%0D%0A${orderItems}%0D%0A%0D%0ATotal: $${total.toFixed(2)}%0D%0A%0D%0AShipping Address:%0D%0A${formData.name}%0D%0A${formData.address}%0D%0A${formData.city}, ${formData.zip}%0D%0A${formData.email}%0D%0A%0D%0APlease contact me to arrange payment.`;
-    
-    window.location.href = `mailto:orders@boom-yeah.com?subject=${subject}&body=${body}`;
-    onClear();
-    onClose();
+    ).join('\n');
+
+    const templateParams = {
+      user_first_name: formData.firstName,
+      user_last_name: formData.lastName,
+      user_email: formData.email,
+      user_address: formData.address1 + '\n' + (formData.address2 ? formData.address2 + '\n' : '') + formData.city + ', ' + formData.state + ' ' + formData.zip,
+      order_details: orderItems,
+      total_price: total.toFixed(2)
+    };
+
+    emailjs.send(
+      'service_d3k2wfq',
+      'template_029nx9k',
+      templateParams,
+      'CFYj7i0r3QSRYMdb0'
+    ).then(() => {
+      alert("Order placed successfully! Check your email for a confirmation.");
+      onClear();
+      onClose();
+    }).catch((error) => {
+      console.error('EmailJS Error:', error);
+      alert("Something went wrong with the email. Please try again.");
+    });
   };
 
   return (
@@ -49,10 +66,10 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
                   <div className="cart-item-info">
                     <h4>{item.title}</h4>
                     <p className="cart-item-meta">
-                      Size: {item.size} | Qty: 
-                      <button onClick={() => onUpdateQuantity(index, -1)} style={{background:'transparent', color:'white', border:'none', cursor:'pointer', margin:'0 4px'}}>-</button>
+                      Size: {item.size} | Qty:
+                      <button onClick={() => onUpdateQuantity(index, -1)} style={{ background: 'transparent', color: 'white', border: 'none', cursor: 'pointer', margin: '0 4px' }}>-</button>
                       {item.quantity}
-                      <button onClick={() => onUpdateQuantity(index, 1)} style={{background:'transparent', color:'white', border:'none', cursor:'pointer', margin:'0 4px'}}>+</button>
+                      <button onClick={() => onUpdateQuantity(index, 1)} style={{ background: 'transparent', color: 'white', border: 'none', cursor: 'pointer', margin: '0 4px' }}>+</button>
                     </p>
                     <p className="cart-item-price">{item.price}</p>
                   </div>
@@ -68,14 +85,19 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
               </div>
 
               <form onSubmit={handlePlaceOrder} className="checkout-form">
-                <input required name="name" placeholder="Full Name" onChange={handleInputChange} />
+                <div className="form-row">
+                  <input required name="firstName" placeholder="First Name" onChange={handleInputChange} />
+                  <input required name="lastName" placeholder="Last Name" onChange={handleInputChange} />
+                </div>
                 <input required name="email" type="email" placeholder="Email Address" onChange={handleInputChange} />
-                <input required name="address" placeholder="Shipping Address" onChange={handleInputChange} />
+                <input required name="address1" placeholder="Address Line 1" onChange={handleInputChange} />
+                <input name="address2" placeholder="Address Line 2 (Optional)" onChange={handleInputChange} />
                 <div className="form-row">
                   <input required name="city" placeholder="City" onChange={handleInputChange} />
+                  <input required name="state" placeholder="State" onChange={handleInputChange} />
                   <input required name="zip" placeholder="Zip Code" onChange={handleInputChange} />
                 </div>
-                <button type="submit" className="add-to-cart-btn checkout-btn">PLACE ORDER (EMAIL)</button>
+                <button type="submit" className="add-to-cart-btn checkout-btn">PLACE ORDER</button>
               </form>
             </div>
           </div>
