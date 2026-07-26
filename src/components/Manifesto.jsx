@@ -4,11 +4,11 @@ const Manifesto = () => {
   return (
     <section className="manifesto">
       <div className="manifesto-image">
-        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Graphic Tee with Eagle and Bear" />
+        <img src="src/assets/images/shirt man.png" />
       </div>
       <div className="manifesto-content">
-        <span className="badge-outline" style={{ alignSelf: 'flex-start' }}>OUR MANIFESTO</span>
-        <span className="section-label" style={{ marginTop: '2rem' }}>02 / THE ATTITUDE</span>
+        {/* <span className="badge-outline" style={{ alignSelf: 'flex-start' }}>OUR MANIFESTO</span> */}
+        {/* <span className="section-label" style={{ marginTop: '2rem' }}>02 / THE ATTITUDE</span> */}
         <h2 className="manifesto-title">BUILT LOUD.<br/>WORN LOUDER.</h2>
         <p className="manifesto-text">
           No safe choices. No quiet flexes. Boom-Yeah! makes visual armor for the days you plan to leave a mark.

@@ -3,32 +3,25 @@ import React from 'react';
 const products = [
   {
     id: 1,
-    title: 'Chrome Shield / Silver',
+    title: 'Boom-Yeah! Mirrored Sunglasses',
     category: 'Eyewear',
-    price: '$148.00',
-    img: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    price: '$9.99',
+    img: 'src/assets/images/glasses front.png'
   },
   {
     id: 2,
-    title: 'Chrome Shield / Black',
-    category: 'Eyewear',
-    price: '$148.00',
-    img: 'https://images.unsplash.com/photo-1577803645773-f96470509666?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 3,
     title: 'Boom-Yeah! Graphic Tee',
     category: 'Apparel',
-    price: '$42.00',
-    img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    price: '$14.99',
+    img: 'src/assets/images/shirt.png'
   }
 ];
 
 const Featured = () => {
   return (
     <section className="featured container">
-      <span className="section-label">01 / THE DROP</span>
-      <h2 className="section-title">FEATURED HARDWARE</h2>
+      {/* <span className="section-label">01 / THE DROP</span> */}
+      <h2 className="section-title">FEATURED PRODUCTS</h2>
       
       <div className="featured-grid">
         {products.map(product => (
