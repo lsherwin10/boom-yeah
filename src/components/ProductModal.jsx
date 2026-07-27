@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 
 const ProductModal = ({ product, onClose, onAdd }) => {
-  const [size, setSize] = useState('M');
+  const [size, setSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const isApparel = product.category === 'Apparel';
 
   const images =
-    product.images && product.images.length > 0
-      ? product.images
-      : [];
+    product.images && product.images.length > 0 ? product.images : [];
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -90,7 +88,8 @@ const ProductModal = ({ product, onClose, onAdd }) => {
               </div>
             </div>
             <button
-              className="add-to-cart-btn"
+              className={`add-to-cart-btn ${isApparel && !size ? 'disabled' : ''}`}
+              disabled={isApparel && !size}
               onClick={() => onAdd(product, isApparel ? size : 'OS', quantity)}
             >
               ADD TO CART

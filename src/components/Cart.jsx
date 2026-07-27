@@ -217,17 +217,8 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
                 {/* 4. Update the submit button to react to the loading state */}
                 <button
                   type="submit"
-                  className="add-to-cart-btn checkout-btn"
+                  className={`add-to-cart-btn checkout-btn ${isSubmitting ? 'disabled' : ''}`}
                   disabled={isSubmitting}
-                  style={
-                    isSubmitting
-                      ? {
-                          backgroundColor: '#555',
-                          cursor: 'not-allowed',
-                          color: '#999',
-                        }
-                      : {}
-                  }
                 >
                   {isSubmitting ? 'PLACING ORDER...' : 'PLACE ORDER'}
                 </button>

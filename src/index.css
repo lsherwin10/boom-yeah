@@ -44,6 +44,18 @@ img {
   display: block;
 }
 
+button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  color: #999;
+}
+
+button:disabled:hover {
+  background: #555;
+  cursor: not-allowed;
+  color: #999;
+}
+
 /* Utilities */
 .container {
   width: 100%;
