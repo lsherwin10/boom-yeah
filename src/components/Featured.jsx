@@ -3,14 +3,14 @@ import React from 'react';
 const products = [
   {
     id: 1,
-    title: 'Boom-Yeah! Mirrored Sunglasses',
+    title: 'BOOM-YEAH! Mirrored Sunglasses',
     category: 'Eyewear',
     price: '$9.99',
     img: 'src/assets/images/glasses front.png'
   },
   {
     id: 2,
-    title: 'Boom-Yeah! Graphic Tee',
+    title: 'BOOM-YEAH! Graphic Tee',
     category: 'Apparel',
     price: '$14.99',
     img: 'src/assets/images/shirt.png'
@@ -20,9 +20,7 @@ const products = [
 const Featured = ({ onProductClick }) => {
   return (
     <section className="featured container">
-      {/* <span className="section-label">01 / THE DROP</span> */}
       <h2 className="section-title">FEATURED PRODUCTS</h2>
-      
       <div className="featured-grid">
         {products.map(product => (
           <div key={product.id} className="product-card" onClick={() => onProductClick(product)}>

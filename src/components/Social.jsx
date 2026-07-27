@@ -12,10 +12,8 @@ const Social = () => {
     <section className="social container">
       <div className="social-header">
         <div>
-          {/* <span className="section-label">03 / SIGHTINGS</span> */}
           <h2 className="section-title" style={{ marginBottom: 0 }}>JOIN THE MOVEMENT</h2>
         </div>
-        {/* Simple Instagram Icon SVG placeholder */}
         <div style={{ width: '32px', height: '32px', border: '2px solid white', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ width: '12px', height: '12px', border: '2px solid white', borderRadius: '50%' }}></div>
         </div>

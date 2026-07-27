@@ -4,13 +4,9 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="container">
-        {/* <div className="hero-top-label">
-          <span className="badge">Shop the collection</span>
-        </div> */}
         <span className="hero-sub">BOOM-YEAH! / EST. 2026</span>
         <h1 className="hero-title">EXPLOSIVE STYLE. NO APOLOGIES.</h1>
-        <p className="hero-desc">Boom-Yeah! Apparel & Eyewear Built for the Bold.</p>
-        {/* <a href="#" className="badge-outline">CHROME / UV400 / NO FRAMES</a> */}
+        <p className="hero-desc">BOOM-YEAH! Apparel & Eyewear Built for the Bold.</p>
       </div>
     </section>
   );
