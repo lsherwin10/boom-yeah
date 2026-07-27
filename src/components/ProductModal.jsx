@@ -65,7 +65,7 @@ const ProductModal = ({ product, onClose, onAdd }) => {
               <div className="modal-section">
                 <label>SIZE</label>
                 <div className="size-selector">
-                  {['S', 'M', 'L', 'XL'].map((s) => (
+                  {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((s) => (
                     <button
                       key={s}
                       className={`size-btn ${size === s ? 'active' : ''}`}
