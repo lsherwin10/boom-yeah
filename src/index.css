@@ -121,7 +121,7 @@ button:disabled:hover {
   padding-bottom: 4rem;
   background-image:
     linear-gradient(to top, var(--bg-color) 0%, transparent 50%),
-    url('src/assets/images/background.png');
+    url('assets/images/background.png');
   background-size: cover;
   background-position: top;
 }
