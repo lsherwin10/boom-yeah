@@ -495,8 +495,30 @@ button:disabled:hover {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
 }
 
-.quantity-selector button:hover {
-  border-color: #fff;
+/* 1. Desktop ONLY (Mouse/Trackpad): Hover & Focus */
+@media (hover: hover) and (pointer: fine) {
+  .quantity-selector button:hover,
+  .quantity-selector button:focus-visible {
+    border-color: #fff;
+  }
+
+  .quantity-selector button:active {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* 2. Touch Devices ONLY (Mobile Safari/iOS): Strip all persistent borders/outlines */
+@media (pointer: coarse) {
+  .quantity-selector button,
+  .quantity-selector button:hover,
+  .quantity-selector button:focus,
+  .quantity-selector button:focus-visible,
+  .quantity-selector button:active {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
 }
 
 .quantity-selector .quantity-input {
