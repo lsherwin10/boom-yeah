@@ -65,7 +65,7 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
       )
       .then(() => {
         alert(
-          'Order placed successfully! Check your email for a confirmation.'
+          'Order placed successfully! Please check your email for confirmation and to arrange payment.'
         );
         onClear();
         onClose();
