@@ -61,7 +61,8 @@ button:disabled:hover {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
 }
 
 .badge {
@@ -174,6 +175,9 @@ button:disabled:hover {
 }
 
 @media (max-width: 768px) {
+  .hero {
+    background-position: top right;
+  }
   .hero-title {
     font-size: 3rem;
   }
@@ -183,8 +187,10 @@ button:disabled:hover {
 }
 
 /* Featured Section */
-.featured {
-  padding: 5rem 0;
+.featured,
+.social {
+  padding: 4rem 0;
+  width: 100%;
 }
 
 .featured-grid {
@@ -247,6 +253,19 @@ button:disabled:hover {
 @media (max-width: 600px) {
   .featured-grid {
     grid-template-columns: 1fr;
+  }
+  .featured-grid,
+  .social-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .product-card,
+  .social-item {
+    width: 100%;
+    max-width: 400px;
   }
 }
 
@@ -516,7 +535,9 @@ button:disabled:hover {
     grid-template-columns: 1fr;
   }
   .modal-image {
-    height: 250px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
   .modal-info {
     padding: 1.5rem;
