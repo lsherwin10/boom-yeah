@@ -106,34 +106,41 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
                   <img src={item.images && item.images[0]} alt={item.title} />
                   <div className="cart-item-info">
                     <h4>{item.title}</h4>
-                    <p className="cart-item-meta">
-                      Size: {item.size} | Qty:
-                      <button
-                        onClick={() => onUpdateQuantity(index, -1)}
-                        style={{
-                          background: 'transparent',
-                          color: 'white',
-                          border: 'none',
-                          cursor: 'pointer',
-                          margin: '0 4px',
-                        }}
-                      >
-                        -
-                      </button>
-                      {item.quantity}
-                      <button
-                        onClick={() => onUpdateQuantity(index, 1)}
-                        style={{
-                          background: 'transparent',
-                          color: 'white',
-                          border: 'none',
-                          cursor: 'pointer',
-                          margin: '0 4px',
-                        }}
-                      >
-                        +
-                      </button>
-                    </p>
+                    <div className="cart-item-meta">
+                      {item.size && (
+                        <span className="cart-item-size">
+                          Size: {item.size}
+                        </span>
+                      )}
+
+                      <div className="quantity-selector cart-quantity-selector">
+                        <button
+                          type="button"
+                          onClick={() => onUpdateQuantity(index, -1)}
+                          onPointerUp={(e) => {
+                            if (e.pointerType === 'mouse')
+                              e.currentTarget.blur();
+                          }}
+                        >
+                          −
+                        </button>
+
+                        <span className="cart-quantity-display">
+                          {item.quantity}
+                        </span>
+
+                        <button
+                          type="button"
+                          onClick={() => onUpdateQuantity(index, 1)}
+                          onPointerUp={(e) => {
+                            if (e.pointerType === 'mouse')
+                              e.currentTarget.blur();
+                          }}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
                     <p className="cart-item-price">{item.price}</p>
                   </div>
                   <button
