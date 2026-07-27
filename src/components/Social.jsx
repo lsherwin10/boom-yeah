@@ -1,10 +1,15 @@
 import React from 'react';
 
+import menInShirts from '../assets/images/men in shirts.png';
+import glassesLifestyleMan from '../assets/images/glasses lifestyle man.png';
+import shirtWoman from '../assets/images/shirt woman.png';
+import glassesLifestyleWoman from '../assets/images/glasses lifestyle woman.png';
+
 const socialImages = [
-  'src/assets/images/men in shirts.png',
-  'src/assets/images/glasses lifestyle man.png',
-  'src/assets/images/shirt woman.png',
-  'src/assets/images/glasses lifestyle woman.png',
+  menInShirts,
+  glassesLifestyleMan,
+  shirtWoman,
+  glassesLifestyleWoman,
 ];
 
 const Social = () => {

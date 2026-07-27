@@ -1,29 +1,29 @@
 import React from 'react';
 
+import glassesFront from '../assets/images/glasses front.png';
+import glassesLeft from '../assets/images/glasses left.png';
+import glassesRight from '../assets/images/glasses right.png';
+import glassesStuff from '../assets/images/glasses stuff.png';
+
+import shirt from '../assets/images/shirt.png';
+import shirtMan from '../assets/images/shirt man.png';
+import shirtWoman from '../assets/images/shirt woman.png';
+import shirtTable from '../assets/images/shirt table.png';
+
 const products = [
   {
     id: 1,
     title: 'BOOM-YEAH! Mirrored Sunglasses',
     category: 'Eyewear',
     price: '$9.99',
-    images: [
-      'src/assets/images/glasses front.png',
-      'src/assets/images/glasses left.png',
-      'src/assets/images/glasses right.png',
-      'src/assets/images/glasses stuff.png',
-    ],
+    images: [glassesFront, glassesLeft, glassesRight, glassesStuff],
   },
   {
     id: 2,
     title: 'BOOM-YEAH! Graphic Tee',
     category: 'Apparel',
     price: '$14.99',
-    images: [
-      'src/assets/images/shirt.png',
-      'src/assets/images/shirt man.png',
-      'src/assets/images/shirt woman.png',
-      'src/assets/images/shirt table.png',
-    ],
+    images: [shirt, shirtMan, shirtWoman, shirtTable],
   },
 ];
 

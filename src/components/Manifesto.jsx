@@ -1,10 +1,12 @@
 import React from 'react';
 
+import menInGlassesWithDrinks from '../assets/images/men in glasses with drinks.png';
+
 const Manifesto = () => {
   return (
     <section className="manifesto">
       <div className="manifesto-image">
-        <img src="src/assets/images/men in glasses with drinks.png" />
+        <img src={menInGlassesWithDrinks} alt="Men with drinks and glasses" />
       </div>
       <div className="manifesto-content">
         <h2 className="manifesto-title">
