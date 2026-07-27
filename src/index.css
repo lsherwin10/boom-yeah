@@ -372,15 +372,17 @@ button:disabled:hover {
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(5px);
+  padding: 1.5rem;
 }
 
 .modal-content {
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 90%;
+  width: 100%;
   max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
-  overflow: hidden;
 }
 
 .modal-close {
@@ -541,6 +543,36 @@ button:disabled:hover {
   }
   .modal-info {
     padding: 1.5rem;
+  }
+}
+
+/* Add this at the bottom of index.css */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-overlay {
+    padding: 0.5rem; /* Tiny margin around edges */
+  }
+
+  .modal-info {
+    padding: 1rem 1.5rem; /* Reduce internal padding from 3rem */
+  }
+
+  .modal-title {
+    font-size: 1.5rem; /* Make heading slightly smaller */
+    margin-bottom: 0.25rem;
+  }
+
+  .modal-price {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .modal-section {
+    margin-bottom: 0.5rem;
+  }
+
+  .add-to-cart-btn {
+    padding: 0.6rem;
+    margin-top: 0.5rem;
   }
 }
 
