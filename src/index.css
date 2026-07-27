@@ -474,15 +474,24 @@ button:disabled:hover {
   border-color: #fff;
 }
 
-.quantity-selector span {
+.quantity-selector .quantity-input {
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-family: var(--font-accent);
+  background: transparent;
+  color: #fff;
+  border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Removes the blue outline when the user clicks to type */
+.quantity-selector .quantity-input:focus {
+  outline: none;
 }
 
 .add-to-cart-btn {

@@ -22,6 +22,30 @@ const ProductModal = ({ product, onClose, onAdd }) => {
     );
   };
 
+  // Allow the user to type the quantity
+  const handleQuantityChange = (e) => {
+    const val = e.target.value;
+
+    // Allow empty string so the user can delete the number to type a new one
+    if (val === '') {
+      setQuantity('');
+      return;
+    }
+
+    // Parse as an integer and update state if it's a valid number
+    const num = parseInt(val, 10);
+    if (!isNaN(num)) {
+      setQuantity(num);
+    }
+  };
+
+  // If the user clicks away leaving the field empty or 0, reset it to 1
+  const handleQuantityBlur = () => {
+    if (quantity === '' || quantity < 1) {
+      setQuantity(1);
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -30,7 +54,6 @@ const ProductModal = ({ product, onClose, onAdd }) => {
         </button>
         <div className="modal-grid">
           <div className="modal-image" style={{ position: 'relative' }}>
-            {/* Previous Arrow - Only show if there are multiple images */}
             {images.length > 1 && (
               <button
                 className="carousel-btn prev-btn"
@@ -46,7 +69,6 @@ const ProductModal = ({ product, onClose, onAdd }) => {
               alt={`${product.title} - View ${currentImageIndex + 1}`}
             />
 
-            {/* Next Arrow - Only show if there are multiple images */}
             {images.length > 1 && (
               <button
                 className="carousel-btn next-btn"
@@ -80,17 +102,39 @@ const ProductModal = ({ product, onClose, onAdd }) => {
             <div className="modal-section">
               <label>QUANTITY</label>
               <div className="quantity-selector">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                <button
+                  onClick={() =>
+                    setQuantity(Math.max(1, (Number(quantity) || 1) - 1))
+                  }
+                >
                   -
                 </button>
-                <span>{quantity}</span>
-                <button onClick={() => setQuantity(quantity + 1)}>+</button>
+
+                <input
+                  type="text"
+                  className="quantity-input"
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                  onBlur={handleQuantityBlur}
+                />
+
+                <button
+                  onClick={() => setQuantity((Number(quantity) || 0) + 1)}
+                >
+                  +
+                </button>
               </div>
             </div>
             <button
               className={`add-to-cart-btn ${isApparel && !size ? 'disabled' : ''}`}
               disabled={isApparel && !size}
-              onClick={() => onAdd(product, isApparel ? size : 'OS', quantity)}
+              onClick={() =>
+                onAdd(
+                  product,
+                  isApparel ? size : 'OS',
+                  quantity === '' ? 1 : quantity
+                )
+              }
             >
               ADD TO CART
             </button>
@@ -101,7 +145,6 @@ const ProductModal = ({ product, onClose, onAdd }) => {
   );
 };
 
-// Simple inline styles to position the arrows vertically centered on the edges
 const baseCarouselBtnStyle = {
   position: 'absolute',
   top: '50%',
