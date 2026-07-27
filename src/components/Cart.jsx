@@ -3,9 +3,13 @@ import emailjs from '@emailjs/browser';
 
 const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', address1: '', address2: '', city: '', state: '', zip: '' });
+  // 1. Add a loading state
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const total = items.reduce((acc, item) => {
-    const priceNum = parseFloat(item.price.replace('$', ''));
+    // Assuming price might sometimes just be a number or not have a $ sign, it's good to ensure it's a string before calling replace.
+    const priceString = String(item.price);
+    const priceNum = parseFloat(priceString.replace('$', ''));
     return acc + (priceNum * item.quantity);
   }, 0);
 
@@ -16,7 +20,9 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
-    // Format cart items for email
+    // 2. Set submitting to true right when the order process starts
+    setIsSubmitting(true);
+
     const orderItems = items.map(item =>
       `${item.quantity}x ${item.title} (Size: ${item.size}) - ${item.price}`
     ).join('\n');
@@ -42,6 +48,9 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
     }).catch((error) => {
       console.error('EmailJS Error:', error);
       alert("Something went wrong with the email. Please try again.");
+    }).finally(() => {
+      // 3. Set submitting back to false regardless of success or failure
+      setIsSubmitting(false);
     });
   };
 
@@ -50,7 +59,7 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
       <div className="cart-drawer" onClick={e => e.stopPropagation()}>
         <div className="cart-header">
           <h2>YOUR CART</h2>
-          <button className="modal-close" onClick={onClose}>✕</button>
+          <button className="modal-close" onClick={onClose} disabled={isSubmitting}>✕</button>
         </div>
 
         {items.length === 0 ? (
@@ -62,7 +71,7 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
             <div className="cart-items">
               {items.map((item, index) => (
                 <div key={index} className="cart-item">
-                  <img src={item.img} alt={item.title} />
+                  <img src={item.images && item.images[0]} alt={item.title} />
                   <div className="cart-item-info">
                     <h4>{item.title}</h4>
                     <p className="cart-item-meta">
@@ -86,18 +95,27 @@ const Cart = ({ items, onClose, onRemove, onUpdateQuantity, onClear }) => {
 
               <form onSubmit={handlePlaceOrder} className="checkout-form">
                 <div className="form-row">
-                  <input required name="firstName" placeholder="First Name" onChange={handleInputChange} />
-                  <input required name="lastName" placeholder="Last Name" onChange={handleInputChange} />
+                  <input required name="firstName" placeholder="First Name" onChange={handleInputChange} disabled={isSubmitting} />
+                  <input required name="lastName" placeholder="Last Name" onChange={handleInputChange} disabled={isSubmitting} />
                 </div>
-                <input required name="email" type="email" placeholder="Email Address" onChange={handleInputChange} />
-                <input required name="address1" placeholder="Address Line 1" onChange={handleInputChange} />
-                <input name="address2" placeholder="Address Line 2 (Optional)" onChange={handleInputChange} />
+                <input required name="email" type="email" placeholder="Email Address" onChange={handleInputChange} disabled={isSubmitting} />
+                <input required name="address1" placeholder="Address Line 1" onChange={handleInputChange} disabled={isSubmitting} />
+                <input name="address2" placeholder="Address Line 2 (Optional)" onChange={handleInputChange} disabled={isSubmitting} />
                 <div className="form-row">
-                  <input required name="city" placeholder="City" onChange={handleInputChange} />
-                  <input required name="state" placeholder="State" onChange={handleInputChange} />
-                  <input required name="zip" placeholder="Zip Code" onChange={handleInputChange} />
+                  <input required name="city" placeholder="City" onChange={handleInputChange} disabled={isSubmitting} />
+                  <input required name="state" placeholder="State" onChange={handleInputChange} disabled={isSubmitting} />
+                  <input required name="zip" placeholder="Zip Code" onChange={handleInputChange} disabled={isSubmitting} />
                 </div>
-                <button type="submit" className="add-to-cart-btn checkout-btn">PLACE ORDER</button>
+
+                {/* 4. Update the submit button to react to the loading state */}
+                <button
+                  type="submit"
+                  className="add-to-cart-btn checkout-btn"
+                  disabled={isSubmitting}
+                  style={isSubmitting ? { backgroundColor: '#555', cursor: 'not-allowed', color: '#999' } : {}}
+                >
+                  {isSubmitting ? 'PLACING ORDER...' : 'PLACE ORDER'}
+                </button>
               </form>
             </div>
           </div>

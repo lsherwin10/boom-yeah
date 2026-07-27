@@ -340,6 +340,7 @@ img {
 
 .modal-image {
   background: #1a1a1a;
+  aspect-ratio: 1 / 1;
 }
 
 .modal-image img {
