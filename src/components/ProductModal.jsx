@@ -106,6 +106,12 @@ const ProductModal = ({ product, onClose, onAdd }) => {
                   onClick={() =>
                     setQuantity(Math.max(1, (Number(quantity) || 1) - 1))
                   }
+                  onPointerUp={(e) => {
+                    // Only blur on desktop mouse/trackpad clicks, not mobile touch taps
+                    if (e.pointerType === 'mouse') {
+                      e.currentTarget.blur();
+                    }
+                  }}
                 >
                   -
                 </button>
@@ -120,6 +126,12 @@ const ProductModal = ({ product, onClose, onAdd }) => {
 
                 <button
                   onClick={() => setQuantity((Number(quantity) || 0) + 1)}
+                  onPointerUp={(e) => {
+                    // Only blur on desktop mouse/trackpad clicks, not mobile touch taps
+                    if (e.pointerType === 'mouse') {
+                      e.currentTarget.blur();
+                    }
+                  }}
                 >
                   +
                 </button>
