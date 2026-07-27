@@ -28,9 +28,11 @@ function App() {
   };
 
   const addToCart = (product, size, quantity) => {
-    setCartItems(prev => {
+    setCartItems((prev) => {
       // Check if item with same id and size exists
-      const existingIndex = prev.findIndex(item => item.id === product.id && item.size === size);
+      const existingIndex = prev.findIndex(
+        (item) => item.id === product.id && item.size === size
+      );
       if (existingIndex > -1) {
         const newCart = [...prev];
         newCart[existingIndex].quantity += quantity;
@@ -43,13 +45,16 @@ function App() {
   };
 
   const removeFromCart = (indexToRemove) => {
-    setCartItems(prev => prev.filter((_, i) => i !== indexToRemove));
+    setCartItems((prev) => prev.filter((_, i) => i !== indexToRemove));
   };
 
   const updateQuantity = (index, delta) => {
-    setCartItems(prev => {
+    setCartItems((prev) => {
       const newCart = [...prev];
-      newCart[index] = { ...newCart[index], quantity: newCart[index].quantity + delta };
+      newCart[index] = {
+        ...newCart[index],
+        quantity: newCart[index].quantity + delta,
+      };
       if (newCart[index].quantity <= 0) {
         return prev.filter((_, i) => i !== index);
       }
@@ -67,17 +72,17 @@ function App() {
       <Social />
 
       {selectedProduct && (
-        <ProductModal 
-          product={selectedProduct} 
-          onClose={closeProductModal} 
-          onAdd={addToCart} 
+        <ProductModal
+          product={selectedProduct}
+          onClose={closeProductModal}
+          onAdd={addToCart}
         />
       )}
 
       {isCartOpen && (
-        <Cart 
-          items={cartItems} 
-          onClose={() => setIsCartOpen(false)} 
+        <Cart
+          items={cartItems}
+          onClose={() => setIsCartOpen(false)}
           onRemove={removeFromCart}
           onUpdateQuantity={updateQuantity}
           onClear={() => setCartItems([])}
@@ -85,10 +90,7 @@ function App() {
       )}
 
       {/* Floating Cart Button */}
-      <button 
-        className="floating-cart-btn" 
-        onClick={() => setIsCartOpen(true)}
-      >
+      <button className="floating-cart-btn" onClick={() => setIsCartOpen(true)}>
         CART ({totalItems})
       </button>
     </>

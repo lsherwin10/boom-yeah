@@ -7,9 +7,10 @@ const ProductModal = ({ product, onClose, onAdd }) => {
 
   const isApparel = product.category === 'Apparel';
 
-  const images = product.images && product.images.length > 0
-    ? product.images
-    : [];
+  const images =
+    product.images && product.images.length > 0
+      ? product.images
+      : [];
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -25,11 +26,12 @@ const ProductModal = ({ product, onClose, onAdd }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>✕</button>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>
+          ✕
+        </button>
         <div className="modal-grid">
           <div className="modal-image" style={{ position: 'relative' }}>
-
             {/* Previous Arrow - Only show if there are multiple images */}
             {images.length > 1 && (
               <button
@@ -56,7 +58,6 @@ const ProductModal = ({ product, onClose, onAdd }) => {
                 &#10095;
               </button>
             )}
-
           </div>
           <div className="modal-info">
             <span className="product-category">{product.category}</span>
@@ -66,7 +67,7 @@ const ProductModal = ({ product, onClose, onAdd }) => {
               <div className="modal-section">
                 <label>SIZE</label>
                 <div className="size-selector">
-                  {['S', 'M', 'L', 'XL'].map(s => (
+                  {['S', 'M', 'L', 'XL'].map((s) => (
                     <button
                       key={s}
                       className={`size-btn ${size === s ? 'active' : ''}`}
@@ -81,12 +82,17 @@ const ProductModal = ({ product, onClose, onAdd }) => {
             <div className="modal-section">
               <label>QUANTITY</label>
               <div className="quantity-selector">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                  -
+                </button>
                 <span>{quantity}</span>
                 <button onClick={() => setQuantity(quantity + 1)}>+</button>
               </div>
             </div>
-            <button className="add-to-cart-btn" onClick={() => onAdd(product, isApparel ? size : 'OS', quantity)}>
+            <button
+              className="add-to-cart-btn"
+              onClick={() => onAdd(product, isApparel ? size : 'OS', quantity)}
+            >
               ADD TO CART
             </button>
           </div>
@@ -107,17 +113,17 @@ const baseCarouselBtnStyle = {
   padding: '10px 15px',
   cursor: 'pointer',
   fontSize: '18px',
-  borderRadius: '3px'
+  borderRadius: '3px',
 };
 
 const carouselBtnStyleLeft = {
   ...baseCarouselBtnStyle,
-  left: '10px'
+  left: '10px',
 };
 
 const carouselBtnStyleRight = {
   ...baseCarouselBtnStyle,
-  right: '10px'
+  right: '10px',
 };
 
 export default ProductModal;
